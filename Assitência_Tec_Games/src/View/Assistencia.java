@@ -75,7 +75,7 @@ public class Assistencia extends JFrame {
 		JButton btnClientes = new JButton("");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Clientes cliente = new Clientes();
+				Clientes2 cliente = new Clientes2();
 				cliente.setVisible(true);
 			}
 		});

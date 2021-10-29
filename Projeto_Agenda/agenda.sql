@@ -1,27 +1,31 @@
 /**
-Agenda de contatos
-@author Cássio Rodrigues Braga
+	Agenda de contato
+    @author Cassio Rodrigues Braga
 */
--- Exibir banco de dados do servidor
+
+-- Abaixo alguns comandos básicos
+
+-- Exibir banco de dados
 show databases;
--- Criar um novo banco de dados
+
+-- Criar um banco de dados
 create database dbagenda;
+
 -- Excluir banco de dados
 drop database dbteste;
--- Selecionar o banco de dados
+
+-- Selecionar banco de dados
 use dbagenda;
 
--- Verifica tabelas existentes
+-- Exibir tabelas existentes
 show tables;
-
--- Criando uma tabela
--- Toda tabela precisa ter uma chave primária (PK)
--- int (Tipos de dados) -> números inteiros
--- primary key -> transforma este campo em chave primária
--- auto_increment -> numeração automática
--- varchar (Tipo de dados equivalente a string) (50) número máximo de caracteres
--- not null -> preenchimento obrigatório
--- unique -> não permite valores duplicados na tabela
+-- Criando tabela (Toda tabela tem que ter uma chave primária (PK)
+-- int (Tipo de dados => números inteiros)
+-- primary key = transforma esse campo em chave primária
+-- auto_increment = numeração automática
+-- varchar = tipo de dados equivalente a String (50) limitação do campo de caracteres
+-- not null = preenchimento obrigatório
+-- unique = não permite valores duplicados na tabela
 create table contatos(
 	id int primary key auto_increment,
     nome varchar(50) not null,
@@ -29,78 +33,66 @@ create table contatos(
     email varchar(50) unique
 );
 
--- descrição da tabela
+-- Descrição da tabela
 describe contatos;
 
--- alterar o nome de um campo na tabela
+-- Alterar o nome de um campo na tabela
 alter table contatos change nome contato varchar(50) not null;
 
--- adicionar um novo campo(coluna) a tabela
+-- Adicionar um novo campo(coluna) a tabela
 alter table contatos add column obs varchar(250);
 
--- adicionar um novo campo(coluna) em um local específico da tabela
-alter table contatos add column fone2 varchar(50) after fone;
-
--- modificar o tipo e dados da coluna e/ou validação na coluna
-alter table contatos modify column fone2 int;
-alter table contatos modify column email varchar(100) not null;
-
--- excluir uma coluna da tabela
-alter table contatos drop column obs;
-
--- excluir a tabela
-drop table contatos;
-
--- CRUD (Create Read Update Delete)
--- operações básicas do banco de dados
-
--- CRUD Create
-insert into contatos(nome,fone,email)
-values ('Cassio Braga','99999-4444','crb@mail.com');
--- CRUD Read
--- selecionar todos os registros (dados) da tabela
-select * from contatos;
-insert into contatos(nome,fone,email)
-values ('Fox Mulder','88888-5555','fox@mail.com');
-insert into contatos(nome,fone,email)
-values ('Dana Scully','77777-6666','dana@mail.com');
-insert into contatos(nome,fone,email)
-values ('Walter Skinner','66666-7777','walter@mail.com');
-insert into contatos(nome,fone)
-values ('Monica Reyes','55555-8888');
-
-select * from contatos;
-
-use dbagenda;
-insert into contatos(nome,fone,email)
-values ('Cassimbas Rodrigues','44444-9999','cr@mail.com');
-
-select * from contatos;
-
-use dbagenda;
-
-select * from contatos;
-
--- selecionar colunas especificas da tabela
-select nome,fone from contatos;
-
--- selecionar colunas em ordem crescente e decrescente
-select * from contatos order by nome;
-select id, nome from contatos order by id desc;
-select id, nome from contatos order by id asc;
-
--- uso de filtros
-select * from contatos where id = 1;
-select * from contatos where nome = 'Cassio Braga';
-select * from contatos where nome like 'C%';
-
-select * from contatos;
-
--- GRUD update
--- ATENÇÃO! Não esqueça de selecionar o where e id no update 
-update contatos set email ='monica@mail.com' where id = 5;
-update contatos set nome ='Jonh Dogget',fone='11111-0000',email='jonh@mail.com' where id = 5;
-
--- GRUD Delete
--- ATENÇÃO! Não esqueça de selecionar o where e id no update
-delete from contatos where id = 6;
+-- Adicionar um novo campo(coluna) em um local especifico na tabela
+alter table contatos add column fone2 varchar(15) after fone;
+ 
+ -- Modificar tipos de dados e/ou validação na coluna
+ alter table contatos modify column fone2 int;
+ alter table contatos modify column email varchar(100);
+ 
+ -- Excluir uma coluna da tabela
+ alter table contatos drop column obs;
+ 
+ -- Escluir da tabela
+ drop table contatos;
+ 
+ use dbagenda;
+ 
+ -- GRUD (Create - Read - Update - Delete)
+ -- Operação básicas do banco de dados
+ 
+ -- GRUD - create
+ insert into contatos(nome,fone,email) values ('Batman que Ri','555-555','btri@ri.com');
+ insert into contatos(nome,fone,email) values ('Bruce Wayne','555-777','bw@wb.com');
+ insert into contatos(nome,fone,email) values ('Clark Kent','555-888','spman@sp.com');
+ insert into contatos(nome,fone,email) values ('Daiana Prince','555-999','dai@pr.com');
+ insert into contatos(nome,fone,email) values ('Berry Allen','555-444','fls@fsh.com');
+ insert into contatos(nome,fone) values ('Arthur Curry','555-333');
+insert into contatos (nome,fone) values ('teste','666-555'); 
+ -- GRUD Read
+ -- Selecionar todos os registros(dados) da tabela
+ select * from contatos;
+ 
+ -- Selecionar uma tabela específica
+ select nome, fone from contatos;
+ 
+ -- Selecionar colunas em ordem crescente e decrescente
+ select * from contatos order by nome;
+ select id, nome from contatos order by id desc;
+ select id, nome from contatos order by id asc;
+ 
+ -- Uso de filtros
+ select * from contatos where id = 1;
+ select * from contatos where id >=3;
+ select * from contatos where nome = 'Bruce Wayne';
+ select * from contatos where nome like 'B%';
+ 
+ -- GRUD Update
+ -- ATENÇÃO! Não esqueça da função where quando precisar alterar algum dado da tabela e de um id específico
+ update contatos set email='flash@fsh.com' where id=5;
+ update contatos set fone='555-3333' where id=4;
+ 
+ -- GRUD Delete
+ -- ATENÇÃO! Não esqueça do where e o Id que deseja apagar
+ delete from contatos where id=7;
+ 
+ select * from contatos;
